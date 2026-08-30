@@ -1,0 +1,38 @@
+server:
+  port: ${IAM_SERVER_PORT:8091}
+
+spring:
+  datasource:
+    url: ${IAM_DB_URL:jdbc:mysql://localhost:3306/edusphere_iam_db?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC}
+    username: ${IAM_DB_USERNAME:iam_user}
+    password: ${IAM_DB_PASSWORD:iam_password}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+  kafka:
+    bootstrap-servers: ${KAFKA_BOOTSTRAP_SERVERS:localhost:29092}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info
+  endpoint:
+    health:
+      show-details: always
+
+edusphere:
+  kafka:
+    topics:
+      identity: edusphere.identity
+
+logging:
+  level:
+    com.edusphere.iam: INFO
+    org.springframework.kafka: WARN
