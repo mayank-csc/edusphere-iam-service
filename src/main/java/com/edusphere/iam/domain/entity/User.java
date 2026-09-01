@@ -26,7 +26,6 @@ public class User {
     @Column(nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
     private String passwordHash;
 
     @Column(nullable = false)
@@ -41,6 +40,12 @@ public class User {
     @Column(nullable = false)
     @Builder.Default
     private String role = "TENANT_ADMIN";
+
+    @Column(nullable = false)
+    @Builder.Default
+    private String provider = "LOCAL";
+
+    private String providerUserId;
 
     @Column(nullable = false)
     @Builder.Default

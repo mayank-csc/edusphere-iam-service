@@ -36,3 +36,27 @@ logging:
   level:
     com.edusphere.iam: INFO
     org.springframework.kafka: WARN
+
+app:
+  jwt:
+    secret: ${JWT_SECRET:}
+    expiration: ${JWT_EXPIRATION:86400000}
+    refresh-expiration: ${JWT_REFRESH_EXPIRATION:604800000}
+    frontend-redirect-uri: ${FRONTEND_REDIRECT_URI:http://localhost:3000/auth/callback}
+  oauth2:
+    google:
+      client-id: ${GOOGLE_CLIENT_ID:}
+      client-secret: ${GOOGLE_CLIENT_SECRET:}
+      redirect-uri: ${GOOGLE_REDIRECT_URI:http://localhost:8091/api/v1/auth/oauth2/callback}
+      token-uri: https://oauth2.googleapis.com/token
+      userinfo-uri: https://www.googleapis.com/oauth2/v3/userinfo
+      auth-uri: https://accounts.google.com/o/oauth2/auth
+      scope: openid email profile
+    microsoft:
+      client-id: ${MICROSOFT_CLIENT_ID:}
+      client-secret: ${MICROSOFT_CLIENT_SECRET:}
+      redirect-uri: ${MICROSOFT_REDIRECT_URI:http://localhost:8093/api/v1/auth/oauth2/callback}
+      token-uri: https://login.microsoftonline.com/common/oauth2/v2.0/token
+      userinfo-uri: https://graph.microsoft.com/oidc/userinfo
+      auth-uri: https://login.microsoftonline.com/common/oauth2/v2.0/authorize
+      scope: openid email profile
